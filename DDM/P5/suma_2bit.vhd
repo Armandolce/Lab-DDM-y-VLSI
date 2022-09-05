@@ -1,0 +1,44 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.ALL;
+
+Entity suma_2bit is
+Port (A_in : in std_logic_vector (1 downto 0);
+        B_in : in std_logic_vector (1 downto 0);
+        Suma : out std_logic_vector (2 downto 0));
+End Entity;
+
+Architecture Behavioral of suma_2bit is
+Component half_add is
+    Port(A : in std_logic;
+          B : in std_logic;
+          C : out std_logic;
+          S : out std_logic);
+End Component;
+
+Component full_add is
+    Port(A : in std_logic;
+          B : in std_logic;
+          Cin : in std_logic;
+          Co : out std_logic;
+          S : out std_logic);
+End Component;
+
+signal c1_aux : std_logic;
+signal c2_aux : std_logic;
+
+Begin
+    suma_medio : half_add
+        Port map(A => A_in(0),
+                    B => B_in(0),
+                    C => c1_aux,
+                    S => Suma(0));
+
+    suma_comp : full_add
+    Port map(A => A_in(1),
+                B => B_in(1),
+                Cin => c1_aux,
+                Co => Suma(2),
+                S => Suma(1));
+
+
+End Behavioral;

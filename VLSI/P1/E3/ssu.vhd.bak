@@ -1,0 +1,33 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ssu is
+port(a: in integer;
+	  f: out std_logic_vector(6 downto 0));
+end entity;
+
+architecture arqssu of ssu is
+begin
+	with a select
+	f<="1000000" when 0,
+		"1111001" when 1,
+		"0100100" when 2,
+		"0110000" when 3,
+		"0011001" when 4,
+		"0010010" when 5,
+		"0000010" when 6,
+		"1111000" when 7,
+		"0000000" when 8,
+		"0011000" when 9,
+		"1000000" when 10,
+		"1111001" when 11,
+		"0100100" when 12,
+		"0110000" when 13,
+		"0011001" when 14,
+		"0010010" when 15,
+		"0000010" when 16,
+		"1111000" when 17,
+		"0000000" when 18,
+		"0011000" when 19,
+		"1111111" when others;
+end architecture;

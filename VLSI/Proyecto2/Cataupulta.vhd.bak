@@ -1,0 +1,15 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Catapulta is
+port(clk: in std_logic
+	  E: in std_logic
+	  Ss0,Ss1,Ss2,Ss3 : in std_logic_vector(6 downto 0)
+	  );
+end entity;
+
+architecture arqCat of Catapulta is
+signal clkl: std_logic
+begin
+
+end architecture;

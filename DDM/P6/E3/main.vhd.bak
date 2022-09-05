@@ -1,0 +1,54 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.ALL;
+
+Entity main is
+Port (clk_in : in std_logic;
+		rst_in : in std_logic;
+		D0 : out std_logic;
+		D1 : out std_logic;
+		QN : out std_logic_vector (1 downto 0));
+End Entity;
+
+Architecture Behavioral of main is
+
+Signal clk_aux: std_logic;
+
+Component ff_jk is
+	Port( clk : in std_logic;
+			rst : in std_logic;
+			j : in std_logic;
+			k : in std_logic;
+			qn : out std_logic;
+			q : out std_logic;
+			led_clk: out std_logic);
+End Component;
+
+Component divisorF is
+    Port (reloj: std_logic;
+          div_clk: out std_logic);
+end component;
+
+Begin
+divisor: divisorF port map(clk_in, clk_aux);
+    clk_aux <= clk_in;
+	 
+
+flip_flop_jk1 : ff_jk
+	Port map(clk => clk_aux,
+				rst => rst_in,
+				j => '1',
+				k => '1',
+				qn => QN(0),
+				q => D0,
+				led_clk => clk_aux);
+				
+flip_flop_jk2 : ff_jk
+	Port map(clk => q,
+				rst => rst_in,
+				j => '1',
+				k => '1',
+				qn => QN(1),
+				q => D1,
+				led_clk => q);
+				
+End Behavioral;

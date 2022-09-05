@@ -1,0 +1,16 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity recorrido is
+port map(clk, direccion : in std_logic;
+			locaciones : out std_logic_vector(41 downto 0));
+end;
+
+architecture arqrec is
+signal clkl : std_logic;
+clkl <= not clk;
+
+begin
+process(clkl)
+	begin
+		if(rising_edge(clkl))  

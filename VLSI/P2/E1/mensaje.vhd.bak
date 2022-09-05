@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mensaje is
+port(s: in std_logic_vector(2 downto 0);
+     ssc: out std_logic_vector(6 downto 0));
+end entity;
+
+architecture arqmsm of mensaje is
+begin
+	with s select
+	ssc<= "1111111" when "000",
+		   "0100001" when "001",
+			"1111001" when "010",
+			"0010010" when "011",
+			"0000110" when "100",
+			"0101010" when "101",
+			"0100011" when "110",
+			"1111111" when "111";
+end architecture;

@@ -1,0 +1,25 @@
+library IEEE;
+use IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity word is
+    Port (Qin : in STD_LOGIC_VECTOR (2 downto 0);
+            Lds : out STD_LOGIC_VECTOR (6 downto 0));
+end word;
+
+architecture Behavioral of word is
+
+begin 
+
+    process(Qin)
+    begin
+        case Qin is
+            when "000" => Lds <= "0001001";
+            when "001" => Lds <= "0001001";
+            when "010" => Lds <= "0001001";
+            when "011" => Lds <= "0001001";
+            when others => Lds <= "1111111";
+        end case
+    end process
+
+end Behavioral;

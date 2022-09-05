@@ -1,0 +1,50 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.ALL;
+
+Entity resta_3bit is
+Port (X_in : in std_logic_vector (2 downto 0);
+		Y_in : in std_logic_vector (2 downto 0);
+		Resta : out std_logic_vector (3 downto 0));
+End Entity;
+
+Architecture Behavioral of resta_3bit is
+Component half_rest is
+	Port(X : in std_logic;
+		  Y : in std_logic;
+		  B : out std_logic;
+		  D : out std_logic);
+End Component;
+
+Component full_rest is
+	Port(X : in std_logic;
+		  Y : in std_logic;
+		  Z : in std_logic;
+		  B : out std_logic;
+		  D : out std_logic);
+End Component;
+
+signal D1_aux : std_logic;
+signal D2_aux : std_logic;
+
+Begin
+resta_medio : half_rest
+	Port map(X => X_in(0),
+				Y => Y_in(0),
+				B => Resta(0),
+				D => D1_aux);
+
+resta_comp1 : full_rest
+	Port map(X => X_in(1),
+				Y => Y_in(1),
+				Z => D1_aux,
+				B => Resta(1),
+				D => D2_aux);
+				
+resta_comp2 : full_rest
+	Port map(X => X_in(2),
+				Y => Y_in(2),
+				Z => D2_aux,
+				B => Suma(2),
+				D => Suma(3));
+	
+End Behavioral;

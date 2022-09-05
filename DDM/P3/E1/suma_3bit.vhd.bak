@@ -1,0 +1,50 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.ALL;
+
+Entity suma_3bit is
+Port (A : in std_logic_vector (2 downto 0);
+		B : in std_logic (2 downto 0);
+		Suma : out std_logic_vector (3 downto 0));
+End Entity;
+
+Architecture Behavioral of suma_3bit is
+Component half_add is
+	Port(A : in std_logic;
+		  B : in std_logic;
+		  C : out std_logic;
+		  S : out std_logic);
+End Component;
+
+Component full_add is
+	Port(A : in std_logic;
+		  B : in std_logic;
+		  Cin : in std_logic;
+		  Co : out std_logic;
+		  S : out std_logic);
+End Component;
+
+signal c1_aux : std_logic;
+signal c2_aux : std_logic;
+
+Begin
+suma_medio : half_add
+	Port map(A => A_in(0),
+				B => B_in(0),
+				C => c1_aux,
+				S => Suma(0));
+
+suma_comp1 : full_add
+	Port map(A => A_in(1),
+				B => B_in(1),
+				Cin => c1_aux,
+				Co => c2_aux,
+				S => Suma(1));
+				
+suma_comp2 : full_add
+	Port map(A => A_in(2),
+				B => B_in(2),
+				Cin => c2_aux,
+				Co => Suma(3),
+				S => Suma(2));
+	
+End Behavioral

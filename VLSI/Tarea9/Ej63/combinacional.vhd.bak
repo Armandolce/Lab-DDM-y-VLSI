@@ -1,0 +1,19 @@
+library ieee;
+use ieee.std_logic_1164.all;
+entity combinacional is
+port (E,Q0,Q1 : in std_logic;
+		D0,D1,S: out std_logic);
+end combinacional;
+
+architecture arq of combinacional is
+begin
+D0<= ((not Q1) AND (NOT Q0) AND E) OR 
+((not Q1) AND (Q0) AND (NOT E)) OR 
+((Q1) AND (NOT Q0) AND (NOT E)) OR 
+((Q1) AND (Q0) AND E);
+D1<= (Q0 AND E) OR ((NOT Q1) AND E) OR
+((NOT Q1) AND (NOT Q0) AND (NOT E));
+S<= (Q1 AND (NOT Q0) AND (NOT E)) OR
+(Q1 AND Q0 AND E);
+
+end architecture arq;

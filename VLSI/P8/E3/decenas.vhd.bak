@@ -1,0 +1,181 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity decenas is
+port(num: in integer;
+     display_ena: in stD_logic;
+	  column: in integer range 0 to 640;
+	  row: in integer range 0 to 480;
+	  red,green,blue: out std_logic_vector(3 downto 0));
+end entity;
+
+architecture arqdec of decenas is
+constant cero: 	integer:=0;
+constant uno: 		integer:=10;
+constant dos: 		integer:=20;
+constant tres: 	integer:=30;
+constant cuatro: 	integer:=40;
+constant cinco: 	integer:=50;
+constant r0: std_logic_vector(3 downto 0):=(others =>'0');
+constant g0: std_logic_vector(3 downto 0):=(others =>'0');
+constant b0: std_logic_vector(3 downto 0):=(others =>'0');
+
+begin
+	process(display_ena,row,column)
+		begin
+			if(display_ena='1') then
+				case num is
+				when cero, 1,2,3,4,5,6,7,8,9 =>
+					if((row>200 and row <210) and (column>110 and column<140)) then --azul
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '1');
+					elsif((row>210 and row<240) and (column>140 and column<150)) then --verde
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>250 and row<280) and (column>140 and column<150)) then --rojo
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '0');
+					elsif((row>280 and row<290) and (column>110 and column<140)) then --blanco
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>250 and row<280) and (column>100 and column<110)) then --cian
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>210 and row<240) and (column>100 and column<110)) then --amarillo
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '0');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+				when uno,11,12,13,14,15,16,17,18,19,20 =>
+					if((row>210 and row<240) and (column>140 and column<150)) then --verde
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>250 and row<280) and (column>140 and column<150)) then --rojo
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '0');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+				when dos,21,22,23,24,25,26,27,28,29 =>
+					if((row>200 and row <210) and (column>110 and column<140)) then --azul
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '1');
+					elsif((row>210 and row<240) and (column>140 and column<150)) then --verde
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>280 and row<290) and (column>110 and column<140)) then --blanco
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>250 and row<280) and (column>100 and column<110)) then --cian
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>240 and row<250) and (column>110 and column<140)) then --violeta
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '1');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+				when tres,31,32,33,34,35,36,37,38,39 =>
+					if((row>200 and row <210) and (column>110 and column<140)) then --azul
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '1');
+					elsif((row>210 and row<240) and (column>140 and column<150)) then --verde
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>250 and row<280) and (column>140 and column<150)) then --rojo
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '0');
+					elsif((row>280 and row<290) and (column>110 and column<140)) then --blanco
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>240 and row<250) and (column>110 and column<140)) then --violeta
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '1');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+				when cuatro,41,42,43,44,45,46,47,48,49 =>
+					if((row>210 and row<240) and (column>140 and column<150)) then --verde
+						red<= (others => '0');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>250 and row<280) and (column>140 and column<150)) then --rojo
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '0');
+					elsif((row>210 and row<240) and (column>100 and column<110)) then --amarillo
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>240 and row<250) and (column>110 and column<140)) then --violeta
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '1');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+					when cinco,51,52,53,54,55,56,57,58,59pp =>
+					if((row>200 and row <210) and (column>110 and column<140)) then --azul
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '1');
+					elsif((row>250 and row<280) and (column>140 and column<150)) then --rojo
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '0');
+					elsif((row>280 and row<290) and (column>110 and column<140)) then --blanco
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '1');
+					elsif((row>210 and row<240) and (column>100 and column<110)) then --amarillo
+						red<= (others => '1');
+						green<= (others => '1');
+						blue<= (others => '0');
+					elsif((row>240 and row<250) and (column>110 and column<140)) then --violeta
+						red<= (others => '1');
+						green<= (others => '0');
+						blue<= (others => '1');
+					else
+						red<= (others => '0');
+						green<= (others => '0');
+						blue<= (others => '0');
+					end if;
+				when others =>
+					red <= r0; green<=g0; blue<=b0;
+				end case;
+			else
+			red<= (others=>'0');
+			green<= (others=>'0');
+			blue<= (others=>'0');
+			end if;
+		end process;
+end architecture;

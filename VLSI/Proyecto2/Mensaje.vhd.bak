@@ -1,0 +1,30 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Mensaje is
+port(E, encendido : in std_logic;
+		Ss0, Ss1,Ss2, Ss3: buffer std_logic_vector(6 downto 0)
+		);
+end entity;
+
+architecture arqmsj of Mensaje is
+
+begin
+	process(E)
+		begin
+			case E is
+				when '0' =>
+					Ss0 <= "0001001";
+					Ss1 <= "0000110";
+					Ss2 <= "1000000";
+					Ss3 <= "1000111";
+				when others =>
+					Ss0 <= "0101011";
+					Ss1 <= "0000110";
+					Ss2 <= "1001000";
+					Ss3 <= "0000110";
+			end case;
+	end process;
+			
+end architecture;
+ 

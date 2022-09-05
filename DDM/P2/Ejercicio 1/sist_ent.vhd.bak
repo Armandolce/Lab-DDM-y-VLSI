@@ -1,0 +1,6 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.all;
+
+Entity sist_entr is
+	Port(Entradas: in std_logic_vector (2 downto 0);
+		Display: out std_logic

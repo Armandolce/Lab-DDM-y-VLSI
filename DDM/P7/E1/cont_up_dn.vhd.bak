@@ -1,0 +1,39 @@
+Library IEEE;
+Use IEEE.STD_LOGIC_1164.ALL;
+Use IEEE.STD_LOGIC_unsigned.ALL;
+Use IEEE.STD_LOGIC_arith.ALL;
+
+Entity cont_up_dn IS
+	PORT( clk, inc, dec : IN std_logic;
+			rst : IN std_logic;
+			Leds : OUT std_logic_vector (3 downto 0));
+END cont_up_dn;
+
+Architecture Behavioral of cont_up_dn is
+	Signal div_clk : std_logic;
+	Signal aux_cuenta : unsigned ( 3 downto 0);
+	
+begin
+	U1 : ENTITY WORK.div_freq (syst) port map ( clk, div_clk );
+	
+	PROCESS( div_clk, rst, inc, dec )
+	variable cuenta : unsigned ( 3 downto 0 ) := "0000";
+	
+	begin
+		IF rising_edge(div_clk) THEN
+			IF (rst = '0')
+				cuenta := X"0";
+			ELSIF (inc = '1' and dec = '1') THEN
+				cuenta := X"F";
+			ELSIF (dec = '1') THEN
+				cuenta := cuenta - 1;
+			ELSIF (inc = '1') THEN
+				cuenta := cuenta + 1;
+			ELSIF (inc = '0' and dec = '0') THEN
+				cuenta := X"0";
+			END IF
+			aux_cuenta <= cuenta;
+		END IF;
+	END PROCESS;
+	Leds <= aux_cuenta;
+END Behavioral
